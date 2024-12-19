@@ -24,3 +24,5 @@ Para testar a conexão com a XRPL, execute os seguintes comandos em seu terminal
 Após instalar as dependências e navegar para o diretório correto, o servidor index.js centraliza os diferentes hooks e efetua a XRPL. No terminal, será possível consultar endereços de 4 carteiras (2 empresariais e 2 de cliente). 
 
 Copie o endereço de uma das carteiras e navegue até o [XRPL Explorer da testnet](https://testnet.xrpl.org/). Cole o endereço da carteira na aba de pesquisa e verifique o balance e as transações da carteira recém criada.
+
+Verifique o exemplo da carteira `rP3hfgByFsbtu4F49iqDDVSx3Ls4Webeyr` no [link a seguir](https://testnet.xrpl.org/accounts/rP3hfgByFsbtu4F49iqDDVSx3Ls4Webeyr).
