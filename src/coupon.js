@@ -39,7 +39,6 @@ async function createCoupon(empresaAddress, produto, valorEmToken) {
  */
 async function darCupomParaCliente(client, empresaWallet, clienteWallet, cupom) {
     try {
-        console.log('Iniciando transferência de cupom...');
 
         if (cupom.valorEmToken === 'undefined') {
             throw new Error('Valor do cupom inválido');
@@ -67,14 +66,11 @@ async function darCupomParaCliente(client, empresaWallet, clienteWallet, cupom) 
 
         const result = await client.submitAndWait(signed.tx_blob);
 
-        // Adicione log para depuração do resultado
-        console.log('Resultado da transação:', result);
-
         if (!result || !result.result) {
             throw new Error('Erro: Resultado da transação inválido.');
         }
 
-        return result;  // Retorne o resultado da transação para o teste
+        return result; 
     } catch (error) {
         console.error('Erro ao transferir cupom:', error);
         return undefined;

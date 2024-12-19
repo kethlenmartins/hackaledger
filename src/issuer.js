@@ -37,12 +37,11 @@ async function createAndIssueCompanyToken(issuerWallet, companyName, clientWalle
     const client = new xrpl.Client('wss://s.altnet.rippletest.net:51233');
     await client.connect();
 
-    // Convertendo o nome do token para HEX
+    // Converte o nome do token para HEX
     const tokenHex = Buffer.from(companyName, "utf8").toString("hex").padEnd(40, '0').toUpperCase();
-    console.log(`Nome do token ${companyName} convertido para HEX: ${tokenHex}`);
 
     try {
-        // Configurando a Trust Line para a empresa
+        // Configura a Trust Line para a empresa
         const trustLineTx = {
             TransactionType: "TrustSet",
             Account: clientWallet.address, // Endereço do cliente
@@ -64,7 +63,7 @@ async function createAndIssueCompanyToken(issuerWallet, companyName, clientWalle
             return;
         }
 
-        // Emitindo os tokens personalizados para o cliente
+        // Emite os tokens personalizados para o cliente
         const paymentTx = {
             TransactionType: "Payment",
             Account: issuerWallet.address, // Endereço do emissor
@@ -76,7 +75,6 @@ async function createAndIssueCompanyToken(issuerWallet, companyName, clientWalle
             }
         };
 
-        console.log(`Emitindo ${amountFIDZ * 1000} tokens para ${clientWallet.address}`);
         const preparedPayment = await client.autofill(paymentTx);
         const signedPayment = issuerWallet.sign(preparedPayment);
         const paymentResult = await client.submitAndWait(signedPayment.tx_blob);
@@ -99,12 +97,10 @@ async function createAndIssueCompanyToken(issuerWallet, companyName, clientWalle
 
 // Função para realizar a compra de tokens por parte do cliente (pagando em FIDZ)
 async function buyTokens(clientWallet, issuerWallet, companyName, fidzAmountToPay) {
-    // A lógica para o cliente pagar em FIDZ por tokens. Aqui, estamos assumindo que 1 token custa 0.001 FIDZ.
+    
     const tokenAmount = fidzAmountToPay / 0.001; // Converte o valor em FIDZ para a quantidade de tokens que o cliente quer comprar
 
-    console.log(`Cliente está pagando ${fidzAmountToPay} FIDZ, o que equivale a ${tokenAmount} tokens.`);
-
-    // Emitir tokens para o cliente com base no pagamento
+    // Emite tokens para o cliente com base no pagamento concluído
     await createAndIssueCompanyToken(issuerWallet, companyName, clientWallet, tokenAmount);
 }
 
