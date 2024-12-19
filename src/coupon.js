@@ -1,24 +1,24 @@
 const xrpl = require('xrpl');
 
 /**
- * Cria um cupom para um produto específico.
- * @param {string} empresaAddress - Endereço da empresa.
- * @param {string} produto - Nome do produto.
- * @param {number} valorEmToken - Quantidade de tokens associados ao cupom.
- * @returns {object} - Objeto do cupom criado.
+ * Cria um cupom para um produto específico
+ * @param {string} empresaAddress - Endereço da carteira da empresa
+ * @param {string} produto - Nome do produto que está atrelado ao token
+ * @param {number} valorEmToken - Quantidade de tokens associados ao cupom
+ * @returns {object} 
  */
 async function createCoupon(empresaAddress, produto, valorEmToken) {
-    // Validando o valor em tokens
+    // Valida o valor em tokens
     if (isNaN(valorEmToken) || valorEmToken <= 0) {
         console.error(`Valor inválido do cupom para o produto ${produto}: ${valorEmToken}`);
-        return { produto, valorEmToken: 'undefined', valorEmFIDZ: 'undefined' }; // Retorna erro explícito
+        return { produto, valorEmToken: 'undefined', valorEmFIDZ: 'undefined' };
     }
 
-    const valorEmFIDZ = 0.001;  // Valor fixo para o cupom em FIDZ
+    const valorEmFIDZ = 0.001;  // Valor fixo e baixo em vez de doação
 
     const cupom = {
         produto,
-        valorEmToken,  // Este é o valor em tokens
+        valorEmToken,  // valor em tokens da empresa
         valorEmFIDZ    // Valor fixo em FIDZ
     };
 
@@ -31,11 +31,11 @@ async function createCoupon(empresaAddress, produto, valorEmToken) {
 }
 
 /**
- * Atribui um cupom a um cliente.
- * @param {object} client - Cliente XRPL.
- * @param {object} empresaWallet - Carteira da empresa.
- * @param {object} clienteWallet - Carteira do cliente.
- * @param {object} cupom - Cupom a ser atribuído.
+ * Atribui um cupom a um cliente
+ * @param {object} client - Cliente XRPL -> conexão na xrpl
+ * @param {object} empresaWallet - Carteira da empresa
+ * @param {object} clienteWallet - Carteira do cliente
+ * @param {object} cupom
  */
 async function darCupomParaCliente(client, empresaWallet, clienteWallet, cupom) {
     try {

@@ -18,7 +18,6 @@ function createToken(empresaAddress, nomeToken, taxaEmFIDZ) {
     console.log(`Token criado: ${nomeToken} (${empresaAddress}) - 1 ${nomeToken} = ${taxaEmFIDZ} FIDZ`);
 }
 
-// Exporta as funções para poder usá-las em outros arquivos
 module.exports = {
     createToken,
     tokens

@@ -3,7 +3,7 @@ const xrpl = require('xrpl');
 // Função para criar e financiar uma carteira automaticamente usando o XRPL
 async function createAndFundWallet(client) {
     try {
-        // Criação e financiamento de carteira com o faucet nativo
+        // Criação e financiamento de carteira com o faucet nativo da xrpl
         const fundedWallet = (await client.fundWallet()).wallet;
 
         console.log('Carteira criada e financiada com sucesso:');
